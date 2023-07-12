@@ -1,0 +1,17 @@
+html {
+    overflow-x: hidden;
+}
+
+span[id$=error_div] {
+    color: red;
+}
+
+.select2-container {
+    width: 100%;
+}
+
+.error-container {
+    padding: 10px;
+    margin-top: 10px;
+    display: none;
+}

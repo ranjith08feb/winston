@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://static.freshdev.io/fdk/2.0/assets/freshdesk.css">
+    <script src="https://static.freshdev.io/fdk/2.0/assets/fresh_client.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/iparams.css">
+    <script src="./assets/iparams.js"></script>
+
+    <script type="text/javascript">
+        function getConfigs(configs) {
+            window.configs = configs;
+            $("#error_div").hide();
+            $("input[name=fs_subdomain]").val(configs["fsSubdomain"]);
+            $("input[name=fs_api_key]").val(configs["fsApiKey"]);
+            $("input[name=six_digit_code]").val(configs["sixDigitCode"]);
+            if(configs){
+                $("input[name=six_digit_code]").attr("disabled", true)
+            }
+        }
+
+        function postConfigs() {
+            var fsSubdomain = $("input[name=fs_subdomain]").val();
+            var fsApiKey = $("input[name=fs_api_key]").val();
+            var sixDigitCode = parseInt($("input[name=six_digit_code]").val());
+
+            return {
+                __meta: {
+                    secure: ["fsApiKey"]
+                },
+                fsSubdomain,
+                fsApiKey,
+                sixDigitCode
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <h3 class="main-header">Stealth Monitoring - Custom App</h3>
+        <div class="col-sm-12">
+            <label for="fs_subdomain">Freshservice Subdomain</label>
+            <input class="form-control" type="text" name="fs_subdomain">
+            <span class="text-muted">This is abc in abc.freshservice.com</span>
+            <span id="fs_subdomain_error_div" class="error" style="display: none;">Please enter a valid freshservice
+                subdomain name.</span>
+            <label for="fs_api_key">Freshservice API Key</label>
+            <input class="form-control" type="password" name="fs_api_key">
+            <span class="text-muted">This is located in your freshservice Profile Settings</span>
+            <span id="fs_api_key_error_div" class="error" style="display: none;">Please enter a valid freshservice api
+                key.</span>
+            <label for="six_digit_code">6 digit code</label>
+            <input class="form-control" type="number" min="6" max="6" name="six_digit_code">
+            <span class="text-muted">This will suffixed for asset tag in a sequence</span>
+            <span id="six_digit_code_error_div" class="error" style="display: none;">Please enter a valid six git
+                number.</span>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="alert-danger error-container">
+        </div>
+    </div>
+</body>
+
+</html>
